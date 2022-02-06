@@ -1,4 +1,5 @@
 PODS:
+  - Alamofire (5.5.0)
   - ImageSlideshow (1.9.2):
     - ImageSlideshow/Core (= 1.9.2)
   - ImageSlideshow/Core (1.9.2)
@@ -8,18 +9,22 @@ PODS:
   - Kingfisher (7.1.2)
 
 DEPENDENCIES:
+  - Alamofire (~> 5.5)
   - ImageSlideshow (~> 1.9.0)
   - ImageSlideshow/Kingfisher
+  - Kingfisher (~> 7.0)
 
 SPEC REPOS:
   trunk:
+    - Alamofire
     - ImageSlideshow
     - Kingfisher
 
 SPEC CHECKSUMS:
+  Alamofire: 1c4fb5369c3fe93d2857c780d8bbe09f06f97e7c
   ImageSlideshow: be305b54eaf2b2cfc7a7141c7c734605d44dc07d
   Kingfisher: 44ed6a8504763f27bab46163adfac83f5deb240c
 
-PODFILE CHECKSUM: 40c845683fcd0ff874327f9612241137c35e4718
+PODFILE CHECKSUM: 33dbc52df505c9900f5f208cac732673c49e1bf8
 
 COCOAPODS: 1.11.2

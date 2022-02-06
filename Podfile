@@ -8,6 +8,7 @@ target 'Ounass' do
   # Pods for Ounass
   pod 'ImageSlideshow', '~> 1.9.0'
   pod "ImageSlideshow/Kingfisher"
+  pod 'Kingfisher', '~> 7.0'
   pod 'Alamofire', '~> 5.5'
 
 end
