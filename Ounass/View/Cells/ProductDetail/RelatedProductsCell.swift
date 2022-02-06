@@ -7,23 +7,32 @@
 
 import UIKit
 
+protocol RelatedProductsCellDelegate: AnyObject {
+    func relatedProductSelected(productSku: String)
+}
+
 class RelatedProductsCell: UITableViewCell {
 
     @IBOutlet weak var relatedProductsCollectionView: UICollectionView!
     var dataSource: [Product] = []
+    weak var delegate: RelatedProductsCellDelegate?
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         relatedProductsCollectionView.register(UINib.init(nibName: "ProductListCell", bundle: nil), forCellWithReuseIdentifier: "ProductListCell")
     }
     
-    func setupCell(products: [Product]) {
+    func setupCell(products: [Product], delegate: RelatedProductsCellDelegate) {
+        self.delegate = delegate
         self.dataSource = products
         relatedProductsCollectionView.reloadData()
     }
 }
 
 extension RelatedProductsCell: UICollectionViewDelegate {
-    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        delegate?.relatedProductSelected(productSku: dataSource[indexPath.row].sku)
+    }
 }
 
 extension RelatedProductsCell: UICollectionViewDataSource {

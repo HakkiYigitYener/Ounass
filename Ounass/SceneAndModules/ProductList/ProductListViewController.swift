@@ -54,8 +54,8 @@ class ProductListViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         switch segue.identifier {
         case "ProductDetail":
-            guard let vc = segue.destination as? ProductDetailViewController, let product = sender as? Product else { return }
-            vc.productSku = product.sku
+            guard let vc = segue.destination as? ProductDetailViewController, let productSku = sender as? String else { return }
+            vc.productSku = productSku
         default: break
         }
     }
@@ -64,7 +64,7 @@ class ProductListViewController: UIViewController {
 
 extension ProductListViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        self.performSegue(withIdentifier: "ProductDetail", sender: viewModel.dataSource[indexPath.row])
+        self.performSegue(withIdentifier: "ProductDetail", sender: viewModel.dataSource[indexPath.row].sku)
     }
 }
 

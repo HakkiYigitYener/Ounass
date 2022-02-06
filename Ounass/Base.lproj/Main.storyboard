@@ -72,7 +72,7 @@
         <!--Product Detail View Controller-->
         <scene sceneID="eOW-mB-pKP">
             <objects>
-                <viewController id="wep-FH-q5G" customClass="ProductDetailViewController" customModule="Ounass" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ProductDetailViewController" id="wep-FH-q5G" customClass="ProductDetailViewController" customModule="Ounass" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="gWg-2e-Sf5">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -118,11 +118,22 @@
                     <navigationItem key="navigationItem" id="QBZ-sG-gAe"/>
                     <connections>
                         <outlet property="productTableView" destination="E7z-GT-0cS" id="PLf-xY-rTJ"/>
+                        <segue destination="HvG-Uf-xK5" kind="show" identifier="ProductDetail" id="BEb-WH-LZj"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0NH-ZS-7Kk" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="860.86956521739137" y="116.51785714285714"/>
+        </scene>
+        <!--ProductDetailViewController-->
+        <scene sceneID="NHQ-6P-aKP">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Main" referencedIdentifier="ProductDetailViewController" id="HvG-Uf-xK5" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="XE9-99-sUQ"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="NJJ-ei-6dQ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1484" y="117"/>
         </scene>
     </scenes>
     <resources>

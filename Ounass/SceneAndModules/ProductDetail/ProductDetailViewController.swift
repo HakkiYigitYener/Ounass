@@ -56,6 +56,15 @@ class ProductDetailViewController: UIViewController {
             return false
         }
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        switch segue.identifier {
+        case "ProductDetail":
+            guard let vc = segue.destination as? ProductDetailViewController, let productSku = sender as? String else { return }
+            vc.productSku = productSku
+        default: break
+        }
+    }
 }
 
 extension ProductDetailViewController: UITableViewDelegate {
@@ -99,7 +108,7 @@ extension ProductDetailViewController: UITableViewDataSource {
             return cell
         case .relatedProducts(products: let products):
             let cell = tableView.dequeueReusableCell(withIdentifier: "RelatedProductsCell", for: indexPath) as! RelatedProductsCell
-            cell.setupCell(products: products)
+            cell.setupCell(products: products, delegate: self)
             return cell
         }
     }
@@ -137,5 +146,11 @@ extension ProductDetailViewController: ProductDetailAccordionHeaderDelegate {
     func didAccordionHeaderTouched(section: Int) {
         accordionStates[section] = !accordionState(for: section)
         productTableView.reloadData()
+    }
+}
+
+extension ProductDetailViewController: RelatedProductsCellDelegate {
+    func relatedProductSelected(productSku: String) {
+        self.performSegue(withIdentifier: "ProductDetail", sender: productSku)
     }
 }
