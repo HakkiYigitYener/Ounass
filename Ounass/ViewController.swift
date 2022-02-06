@@ -9,6 +9,7 @@ import UIKit
 
 class ViewController: UIViewController {
     @IBOutlet weak var productListCollectionView: UICollectionView!
+    let refreshControl = UIRefreshControl()
     
     var dataSource: [Product] = []
     var paginationData: Pagination?
@@ -22,16 +23,29 @@ class ViewController: UIViewController {
     
     func setupUI() {
         productListCollectionView.register(UINib.init(nibName: "ProductListCell", bundle: nil), forCellWithReuseIdentifier: "ProductListCell")
+        refreshControl.attributedTitle = NSAttributedString(string: "Pull to refresh")
+        refreshControl.addTarget(self, action: #selector(self.refresh(_:)), for: .valueChanged)
+        productListCollectionView.addSubview(refreshControl)
     }
     
-    func fetchProductList(page: Int = 0)  {
+    func fetchProductList(page: Int = 0, shouldClear: Bool = false)  {
         isFetching = true
         NetworkManager.shared.fetchProductList(page: 0) {productList in
             self.isFetching = false
-            self.dataSource += productList.products
+            self.refreshControl.endRefreshing()
+            if shouldClear {
+                self.dataSource = productList.products
+            }
+            else {
+                self.dataSource += productList.products
+            }
             self.paginationData = productList.pagination
             self.productListCollectionView.reloadData()
         }
+    }
+    
+    @objc func refresh(_ sender: AnyObject) {
+        fetchProductList(page: 0, shouldClear: true)
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
