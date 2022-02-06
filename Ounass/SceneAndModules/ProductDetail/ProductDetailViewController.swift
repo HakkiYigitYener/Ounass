@@ -34,11 +34,13 @@ class ProductDetailViewController: UIViewController {
         viewModel.addChangeHandler { [weak self] (state) in
             switch state {
             case .fetching:
-                break
+                self?.showIndicator(message: "Loading...", animationType: .ballRotateChase)
             case .succeeded:
+                self?.hideIndicator()
                 self?.title = self?.viewModel.product?.name
                 self?.productTableView.reloadData()
             case .failed(let errorMessage):
+                self?.hideIndicator()
                 self?.showAlertMessage(title: "Warning", message: errorMessage)
                 self?.productTableView.reloadData()
             }

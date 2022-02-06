@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import ANActivityIndicator
 
 class ProductListViewController: UIViewController {
     @IBOutlet weak var productListCollectionView: UICollectionView!
@@ -31,12 +32,14 @@ class ProductListViewController: UIViewController {
         viewModel.addChangeHandler { [weak self] (state) in
             switch state {
             case .fetching:
-                //TODO: Add loading
+                self?.showIndicator(message: "Loading...", animationType: .ballRotateChase)
                 break
             case .succeeded:
+                self?.hideIndicator()
                 self?.refreshControl.endRefreshing()
                 self?.productListCollectionView.reloadData()
             case .failed(let errorMessage):
+                self?.hideIndicator()
                 self?.showAlertMessage(title: "Warning", message: errorMessage)
                 self?.refreshControl.endRefreshing()
                 self?.productListCollectionView.reloadData()

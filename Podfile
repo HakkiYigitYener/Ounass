@@ -10,5 +10,5 @@ target 'Ounass' do
   pod "ImageSlideshow/Kingfisher"
   pod 'Kingfisher', '~> 7.0'
   pod 'Alamofire', '~> 5.5'
-
+  pod 'ANActivityIndicator'
 end
