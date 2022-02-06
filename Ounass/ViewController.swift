@@ -11,7 +11,8 @@ class ViewController: UIViewController {
     @IBOutlet weak var productListCollectionView: UICollectionView!
     
     var dataSource: [Product] = []
-    
+    var paginationData: Pagination?
+    var isFetching = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,8 +25,11 @@ class ViewController: UIViewController {
     }
     
     func fetchProductList(page: Int = 0)  {
+        isFetching = true
         NetworkManager.shared.fetchProductList(page: 0) {productList in
+            self.isFetching = false
             self.dataSource += productList.products
+            self.paginationData = productList.pagination
             self.productListCollectionView.reloadData()
         }
     }
@@ -68,7 +72,13 @@ extension ViewController: UICollectionViewDataSource {
 
 extension ViewController: UICollectionViewDataSourcePrefetching {
     func collectionView(_ collectionView: UICollectionView, prefetchItemsAt indexPaths: [IndexPath]) {
-        //TODO: Lazy loading
+        print(indexPaths)
+        guard let maxIndex = indexPaths.sorted(by: { index1, index2 in
+            return index1.row > index2.row
+        }).first?.row else { return }
+        if maxIndex >= (dataSource.count - 1), let paginationData = paginationData, paginationData.currentPage < (paginationData.totalPages - 1), !isFetching {
+            fetchProductList(page: paginationData.currentPage + 1)
+        }
     }
 }
 
