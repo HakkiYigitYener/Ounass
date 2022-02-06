@@ -33,7 +33,6 @@ public enum OunessApi {
         return environmentBaseURL + path
     }
     
-    
     var params: [String:Encodable] {
         switch self {
         case .productList(let page):
