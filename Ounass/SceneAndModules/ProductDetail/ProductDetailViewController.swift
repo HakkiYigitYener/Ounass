@@ -9,11 +9,11 @@ import UIKit
 import ImageSlideshow
 
 class ProductDetailViewController: UIViewController {
-    var productSku: String?
-
-    
     @IBOutlet weak var productTableView: UITableView!
     let viewModel = ProductDetailViewModel()
+    var productSku: String?
+    var accordionStates: [Int:Bool] = [:]
+    
     
     
 
@@ -45,6 +45,16 @@ class ProductDetailViewController: UIViewController {
             }
         }
     }
+    
+    func accordionState(for section: Int) -> Bool {
+        if let state = accordionStates[section] {
+            return state
+        }
+        else {
+            accordionStates[section] = false
+            return false
+        }
+    }
 }
 
 extension ProductDetailViewController: UITableViewDelegate {
@@ -58,7 +68,12 @@ extension ProductDetailViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        switch viewModel.sectionData[section] {
+        case .description(title: _, description: _):
+            return accordionState(for: section) ? 1 : 0
+        default:
+            return 1
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -88,7 +103,7 @@ extension ProductDetailViewController: UITableViewDataSource {
         switch viewModel.sectionData[section] {
         case .description(title: let title , description: _):
             let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: "ProductDetailAccordionHeader") as! ProductDetailAccordionHeader
-            header.setupHeader(title: title, isOpen: Bool.random())
+            header.setupHeader(title: title, isOpen: accordionState(for: section), section: section, delegate: self)
             return header
         default:
             return nil
@@ -110,5 +125,12 @@ extension ProductDetailViewController: UITableViewDataSource {
 extension ProductDetailViewController: ProductDetailSliderCellDelegate {
     func didTapSliderImage(imageSlideView: ImageSlideshow) {
         imageSlideView.presentFullScreenController(from: self)
+    }
+}
+
+extension ProductDetailViewController: ProductDetailAccordionHeaderDelegate {
+    func didAccordionHeaderTouched(section: Int) {
+        accordionStates[section] = !accordionState(for: section)
+        productTableView.reloadData()
     }
 }
