@@ -8,11 +8,11 @@
 import UIKit
 import ImageSlideshow
 
-class ProductDetailViewController: UIViewController {
+class ProductDetailViewController: BaseViewController {
     @IBOutlet weak var productTableView: UITableView!
-    let viewModel = ProductDetailViewModel()
+    private let viewModel = ProductDetailViewModel()
     var productSku: String?
-    var accordionStates: [Int:Bool] = [:]
+    private var accordionStates: [Int:Bool] = [:]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,12 +22,10 @@ class ProductDetailViewController: UIViewController {
     }
     
     func setupUI() {
-        productTableView.register(UINib.init(nibName: "ProductDetailSliderCell", bundle: nil), forCellReuseIdentifier: "ProductDetailSliderCell")
-        productTableView.register(UINib.init(nibName: "ProductTitleCell", bundle: nil), forCellReuseIdentifier: "ProductTitleCell")
-        productTableView.register(UINib.init(nibName: "ProductAmberPointCell", bundle: nil), forCellReuseIdentifier: "ProductAmberPointCell")
+        
+        let cells = [ ProductDetailSliderCell.self, ProductTitleCell.self, ProductAmberPointCell.self, ProductDetailAccordionCell.self, RelatedProductsCell.self ]
+        productTableView.register(cellTypes: cells, bundle: Bundle.main)
         productTableView.register(UINib.init(nibName: "ProductDetailAccordionHeader", bundle: nil), forHeaderFooterViewReuseIdentifier: "ProductDetailAccordionHeader")
-        productTableView.register(UINib.init(nibName: "ProductDetailAccordionCell", bundle: nil), forCellReuseIdentifier: "ProductDetailAccordionCell")
-        productTableView.register(UINib.init(nibName: "RelatedProductsCell", bundle: nil), forCellReuseIdentifier: "RelatedProductsCell")
     }
     
     private func handleStateChanges() {
@@ -35,9 +33,9 @@ class ProductDetailViewController: UIViewController {
             switch state {
             case .fetching:
                 self?.showIndicator(message: "Loading...", animationType: .ballRotateChase)
-            case .succeeded:
+            case .succeeded(let title):
                 self?.hideIndicator()
-                self?.title = self?.viewModel.product?.name
+                self?.title = title
                 self?.productTableView.reloadData()
             case .failed(let errorMessage):
                 self?.hideIndicator()
@@ -89,25 +87,25 @@ extension ProductDetailViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         switch viewModel.sectionData[indexPath.section] {
         case .slider(let medias):
-            let cell = tableView.dequeueReusableCell(withIdentifier: "ProductDetailSliderCell", for: indexPath) as! ProductDetailSliderCell
+            let cell = tableView.dequeueReusableCell(with: ProductDetailSliderCell.self, for: indexPath)
             cell.setupCell(medias: medias, delegate: self)
             return cell
         case .title(let designer, let name, let price):
-            let cell = tableView.dequeueReusableCell(withIdentifier: "ProductTitleCell", for: indexPath) as! ProductTitleCell
+            let cell = tableView.dequeueReusableCell(with: ProductTitleCell.self, for: indexPath)
             cell.setupCell(designerName: designer,
                            productName: name,
                            price: price)
             return cell
         case .amberPoints(let amberPoint):
-            let cell = tableView.dequeueReusableCell(withIdentifier: "ProductAmberPointCell", for: indexPath) as! ProductAmberPointCell
+            let cell = tableView.dequeueReusableCell(with: ProductAmberPointCell.self, for: indexPath)
             cell.setupCell(amberPoint: amberPoint)
             return cell
         case .description(title: _ , description: let description):
-            let cell = tableView.dequeueReusableCell(withIdentifier: "ProductDetailAccordionCell", for: indexPath) as! ProductDetailAccordionCell
+            let cell = tableView.dequeueReusableCell(with: ProductDetailAccordionCell.self, for: indexPath)
             cell.setupCell(descriptionText: description)
             return cell
         case .relatedProducts(products: let products):
-            let cell = tableView.dequeueReusableCell(withIdentifier: "RelatedProductsCell", for: indexPath) as! RelatedProductsCell
+            let cell = tableView.dequeueReusableCell(with: RelatedProductsCell.self, for: indexPath)
             cell.setupCell(products: products, delegate: self)
             return cell
         }

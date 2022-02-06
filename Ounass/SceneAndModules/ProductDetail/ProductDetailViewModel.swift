@@ -14,9 +14,9 @@ protocol ProductDetailServiceProtocol {
 class ProductDetailViewModel: BaseViewModel<ProductDetailViewModel.State> {
     
     enum State: StateChange {
-            case fetching
-            case succeeded
-            case failed(errorMessage: String)
+        case fetching
+        case succeeded(title: String)
+        case failed(errorMessage: String)
     }
     
     enum SectionModel {
@@ -28,7 +28,6 @@ class ProductDetailViewModel: BaseViewModel<ProductDetailViewModel.State> {
     }
     
     private(set) var sectionData:[SectionModel] = []
-    private(set) var product: Product?
     
     let apiService: ProductDetailServiceProtocol
     
@@ -46,7 +45,6 @@ class ProductDetailViewModel: BaseViewModel<ProductDetailViewModel.State> {
                 self?.emit(change: .failed(errorMessage: error?.localizedDescription ?? ""))
                 return
             }
-            self?.product = productDetail
             self?.setupDataSource(product: productDetail)
         }
     }
@@ -65,6 +63,6 @@ class ProductDetailViewModel: BaseViewModel<ProductDetailViewModel.State> {
             }
             sectionData.append(.relatedProducts(products: relatedProducts))
         }
-        self.emit(change: .succeeded)
+        self.emit(change: .succeeded(title: product.name))
     }
 }

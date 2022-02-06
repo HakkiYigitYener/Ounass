@@ -6,13 +6,11 @@
 //
 
 import UIKit
-import ANActivityIndicator
 
-class ProductListViewController: UIViewController {
-    @IBOutlet weak var productListCollectionView: UICollectionView!
-    let refreshControl = UIRefreshControl()
-    let viewModel = ProductListViewModel()
-
+class ProductListViewController: BaseViewController {
+    @IBOutlet private weak var productListCollectionView: UICollectionView!
+    private let refreshControl = UIRefreshControl()
+    private let viewModel = ProductListViewModel()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,8 +20,8 @@ class ProductListViewController: UIViewController {
     }
     
     func setupUI() {
-        productListCollectionView.register(UINib.init(nibName: "ProductListCell", bundle: nil), forCellWithReuseIdentifier: "ProductListCell")
-        refreshControl.attributedTitle = NSAttributedString(string: "Pull to refresh")
+        productListCollectionView.register(cellType: ProductListCell.self, bundle: nil)
+        refreshControl.attributedTitle = NSAttributedString(string: "Refreshing")
         refreshControl.addTarget(self, action: #selector(self.refresh(_:)), for: .valueChanged)
         productListCollectionView.addSubview(refreshControl)
     }
@@ -74,7 +72,7 @@ extension ProductListViewController: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ProductListCell", for: indexPath) as! ProductListCell
+        let cell = collectionView.dequeueReusableCell(with: ProductListCell.self, for: indexPath)
         let product = viewModel.dataSource[indexPath.row]
         cell.setupCell(designerName: product.designerCategoryName,
                        productName: product.name,

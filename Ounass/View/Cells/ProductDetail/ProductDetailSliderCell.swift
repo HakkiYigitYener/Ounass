@@ -20,7 +20,15 @@ class ProductDetailSliderCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        setupUI()
         addTouchGestureToImageSlider()
+    }
+    
+    func setupUI() {
+        let pageIndicator = UIPageControl()
+        pageIndicator.currentPageIndicatorTintColor = .black
+        pageIndicator.pageIndicatorTintColor = .lightGray
+        imageSlideView.pageIndicator = pageIndicator
     }
     
     func addTouchGestureToImageSlider() {

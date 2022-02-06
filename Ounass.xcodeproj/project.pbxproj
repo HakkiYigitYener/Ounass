@@ -30,6 +30,10 @@
 		AA220FDF27B02C8400EF057D /* ProductDetailService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA220FDE27B02C8400EF057D /* ProductDetailService.swift */; };
 		AA220FE227B0598000EF057D /* RelatedProductsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA220FE027B0597F00EF057D /* RelatedProductsCell.swift */; };
 		AA220FE327B0598000EF057D /* RelatedProductsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AA220FE127B0598000EF057D /* RelatedProductsCell.xib */; };
+		AA220FE827B0768D00EF057D /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA220FE727B0768D00EF057D /* BaseViewController.swift */; };
+		AA220FEA27B0777400EF057D /* UITableViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA220FE927B0777400EF057D /* UITableViewExtensions.swift */; };
+		AA220FEC27B077A300EF057D /* NSObjectExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA220FEB27B077A300EF057D /* NSObjectExtensions.swift */; };
+		AA220FEE27B0785F00EF057D /* UICollectionViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA220FED27B0785F00EF057D /* UICollectionViewExtensions.swift */; };
 		AAB44F9527ADBF8C00B1ED4A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAB44F9427ADBF8C00B1ED4A /* AppDelegate.swift */; };
 		AAB44F9727ADBF8C00B1ED4A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAB44F9627ADBF8C00B1ED4A /* SceneDelegate.swift */; };
 		AAB44F9927ADBF8C00B1ED4A /* ProductListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAB44F9827ADBF8C00B1ED4A /* ProductListViewController.swift */; };
@@ -75,6 +79,10 @@
 		AA220FDE27B02C8400EF057D /* ProductDetailService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductDetailService.swift; sourceTree = "<group>"; };
 		AA220FE027B0597F00EF057D /* RelatedProductsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RelatedProductsCell.swift; sourceTree = "<group>"; };
 		AA220FE127B0598000EF057D /* RelatedProductsCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RelatedProductsCell.xib; sourceTree = "<group>"; };
+		AA220FE727B0768D00EF057D /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
+		AA220FE927B0777400EF057D /* UITableViewExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITableViewExtensions.swift; sourceTree = "<group>"; };
+		AA220FEB27B077A300EF057D /* NSObjectExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSObjectExtensions.swift; sourceTree = "<group>"; };
+		AA220FED27B0785F00EF057D /* UICollectionViewExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UICollectionViewExtensions.swift; sourceTree = "<group>"; };
 		AAB44F9127ADBF8C00B1ED4A /* Ounass.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Ounass.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AAB44F9427ADBF8C00B1ED4A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		AAB44F9627ADBF8C00B1ED4A /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -179,6 +187,7 @@
 			isa = PBXGroup;
 			children = (
 				AA220FCB27B00F7C00EF057D /* BaseViewModel.swift */,
+				AA220FE727B0768D00EF057D /* BaseViewController.swift */,
 			);
 			path = Base;
 			sourceTree = "<group>";
@@ -209,6 +218,33 @@
 			path = ProductDetail;
 			sourceTree = "<group>";
 		};
+		AA220FE427B0750100EF057D /* Application */ = {
+			isa = PBXGroup;
+			children = (
+				AAB44F9427ADBF8C00B1ED4A /* AppDelegate.swift */,
+				AAB44F9627ADBF8C00B1ED4A /* SceneDelegate.swift */,
+				AAB44FA227ADBF8D00B1ED4A /* Info.plist */,
+			);
+			path = Application;
+			sourceTree = "<group>";
+		};
+		AA220FE527B0750D00EF057D /* StoryBoards */ = {
+			isa = PBXGroup;
+			children = (
+				AAB44F9A27ADBF8C00B1ED4A /* Main.storyboard */,
+				AAB44F9F27ADBF8D00B1ED4A /* LaunchScreen.storyboard */,
+			);
+			path = StoryBoards;
+			sourceTree = "<group>";
+		};
+		AA220FE627B0753600EF057D /* ImagesAndAssets */ = {
+			isa = PBXGroup;
+			children = (
+				AAB44F9D27ADBF8D00B1ED4A /* Assets.xcassets */,
+			);
+			path = ImagesAndAssets;
+			sourceTree = "<group>";
+		};
 		AAB44F8827ADBF8C00B1ED4A = {
 			isa = PBXGroup;
 			children = (
@@ -230,17 +266,14 @@
 		AAB44F9327ADBF8C00B1ED4A /* Ounass */ = {
 			isa = PBXGroup;
 			children = (
-				AAB44F9427ADBF8C00B1ED4A /* AppDelegate.swift */,
-				AAB44F9627ADBF8C00B1ED4A /* SceneDelegate.swift */,
+				AA220FE427B0750100EF057D /* Application */,
 				AA220FBD27B0099300EF057D /* SceneAndModules */,
 				AAB44FB527AF512B00B1ED4A /* Model */,
 				AAB4528627AF65B600B1ED4A /* View */,
 				AA220FCD27B0144D00EF057D /* ServiceManager */,
 				AAB4529527AF7DE300B1ED4A /* Extensions */,
-				AAB44F9A27ADBF8C00B1ED4A /* Main.storyboard */,
-				AAB44F9D27ADBF8D00B1ED4A /* Assets.xcassets */,
-				AAB44F9F27ADBF8D00B1ED4A /* LaunchScreen.storyboard */,
-				AAB44FA227ADBF8D00B1ED4A /* Info.plist */,
+				AA220FE527B0750D00EF057D /* StoryBoards */,
+				AA220FE627B0753600EF057D /* ImagesAndAssets */,
 			);
 			path = Ounass;
 			sourceTree = "<group>";
@@ -301,6 +334,9 @@
 				AA220FAD27AFE3A400EF057D /* StringExtensions.swift */,
 				AA220FB727AFFD0100EF057D /* UIViewExtensions.swift */,
 				AA220FD227B017DB00EF057D /* UIViewControllerExtensions.swift */,
+				AA220FE927B0777400EF057D /* UITableViewExtensions.swift */,
+				AA220FED27B0785F00EF057D /* UICollectionViewExtensions.swift */,
+				AA220FEB27B077A300EF057D /* NSObjectExtensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -441,10 +477,13 @@
 			files = (
 				AA220FB827AFFD0100EF057D /* UIViewExtensions.swift in Sources */,
 				AA220FB127AFE53000EF057D /* ProductAmberPointCell.swift in Sources */,
+				AA220FEC27B077A300EF057D /* NSObjectExtensions.swift in Sources */,
 				AAB4527627AF636E00B1ED4A /* Pagination.swift in Sources */,
 				AAB4529927AF7F2000B1ED4A /* ImageViewExtensions.swift in Sources */,
+				AA220FE827B0768D00EF057D /* BaseViewController.swift in Sources */,
 				AAB4508227AF53F900B1ED4A /* Product.swift in Sources */,
 				AAB44F9927ADBF8C00B1ED4A /* ProductListViewController.swift in Sources */,
+				AA220FEA27B0777400EF057D /* UITableViewExtensions.swift in Sources */,
 				AA220FB427AFFAD400EF057D /* ProductDetailAccordionHeader.swift in Sources */,
 				AA220FE227B0598000EF057D /* RelatedProductsCell.swift in Sources */,
 				AAB4526F27AF636E00B1ED4A /* ProductList.swift in Sources */,
@@ -466,6 +505,7 @@
 				AAB4529027AF746900B1ED4A /* ProductDetailViewController.swift in Sources */,
 				AAB44F9727ADBF8C00B1ED4A /* SceneDelegate.swift in Sources */,
 				AA220FCC27B00F7C00EF057D /* BaseViewModel.swift in Sources */,
+				AA220FEE27B0785F00EF057D /* UICollectionViewExtensions.swift in Sources */,
 				AA220FA227AFA0AC00EF057D /* ImageSlideShowExtensions.swift in Sources */,
 				AAB4528A27AF65F000B1ED4A /* ProductListCell.swift in Sources */,
 				AA220FAE27AFE3A400EF057D /* StringExtensions.swift in Sources */,
@@ -620,7 +660,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = WYH7BJL659;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = Ounass/Info.plist;
+				INFOPLIST_FILE = Ounass/Application/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Ounass Case";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
@@ -651,7 +691,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = WYH7BJL659;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = Ounass/Info.plist;
+				INFOPLIST_FILE = Ounass/Application/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Ounass Case";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
