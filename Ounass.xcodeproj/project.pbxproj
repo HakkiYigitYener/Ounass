@@ -28,6 +28,8 @@
 		AA220FD527B01BD700EF057D /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA220FD427B01BD700EF057D /* Endpoint.swift */; };
 		AA220FDD27B02BD900EF057D /* ProductDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA220FDC27B02BD900EF057D /* ProductDetailViewModel.swift */; };
 		AA220FDF27B02C8400EF057D /* ProductDetailService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA220FDE27B02C8400EF057D /* ProductDetailService.swift */; };
+		AA220FE227B0598000EF057D /* RelatedProductsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA220FE027B0597F00EF057D /* RelatedProductsCell.swift */; };
+		AA220FE327B0598000EF057D /* RelatedProductsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AA220FE127B0598000EF057D /* RelatedProductsCell.xib */; };
 		AAB44F9527ADBF8C00B1ED4A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAB44F9427ADBF8C00B1ED4A /* AppDelegate.swift */; };
 		AAB44F9727ADBF8C00B1ED4A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAB44F9627ADBF8C00B1ED4A /* SceneDelegate.swift */; };
 		AAB44F9927ADBF8C00B1ED4A /* ProductListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAB44F9827ADBF8C00B1ED4A /* ProductListViewController.swift */; };
@@ -71,6 +73,8 @@
 		AA220FD427B01BD700EF057D /* Endpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpoint.swift; sourceTree = "<group>"; };
 		AA220FDC27B02BD900EF057D /* ProductDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductDetailViewModel.swift; sourceTree = "<group>"; };
 		AA220FDE27B02C8400EF057D /* ProductDetailService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductDetailService.swift; sourceTree = "<group>"; };
+		AA220FE027B0597F00EF057D /* RelatedProductsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RelatedProductsCell.swift; sourceTree = "<group>"; };
+		AA220FE127B0598000EF057D /* RelatedProductsCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RelatedProductsCell.xib; sourceTree = "<group>"; };
 		AAB44F9127ADBF8C00B1ED4A /* Ounass.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Ounass.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AAB44F9427ADBF8C00B1ED4A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		AAB44F9627ADBF8C00B1ED4A /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -137,6 +141,8 @@
 				AA220FB527AFFAF700EF057D /* ProductDetailAccordionHeader.xib */,
 				AA220FB927AFFDEA00EF057D /* ProductDetailAccordionCell.swift */,
 				AA220FBA27AFFDEA00EF057D /* ProductDetailAccordionCell.xib */,
+				AA220FE027B0597F00EF057D /* RelatedProductsCell.swift */,
+				AA220FE127B0598000EF057D /* RelatedProductsCell.xib */,
 			);
 			path = ProductDetail;
 			sourceTree = "<group>";
@@ -378,6 +384,7 @@
 				AAB4528B27AF65F000B1ED4A /* ProductListCell.xib in Resources */,
 				AAB44F9E27ADBF8D00B1ED4A /* Assets.xcassets in Resources */,
 				AA220FBC27AFFDEA00EF057D /* ProductDetailAccordionCell.xib in Resources */,
+				AA220FE327B0598000EF057D /* RelatedProductsCell.xib in Resources */,
 				AA220FB227AFE53000EF057D /* ProductAmberPointCell.xib in Resources */,
 				AAB44F9C27ADBF8C00B1ED4A /* Main.storyboard in Resources */,
 			);
@@ -439,6 +446,7 @@
 				AAB4508227AF53F900B1ED4A /* Product.swift in Sources */,
 				AAB44F9927ADBF8C00B1ED4A /* ProductListViewController.swift in Sources */,
 				AA220FB427AFFAD400EF057D /* ProductDetailAccordionHeader.swift in Sources */,
+				AA220FE227B0598000EF057D /* RelatedProductsCell.swift in Sources */,
 				AAB4526F27AF636E00B1ED4A /* ProductList.swift in Sources */,
 				AA220FD127B0147C00EF057D /* ProductListService.swift in Sources */,
 				AAB4509827AF53F900B1ED4A /* ConfigurableAttributeOption.swift in Sources */,

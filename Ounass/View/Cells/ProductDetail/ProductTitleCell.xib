@@ -31,7 +31,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Price" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Twg-nw-yDL">
-                        <rect key="frame" x="0.0" y="57" width="320" height="35"/>
+                        <rect key="frame" x="0.0" y="57" width="320" height="30"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <color key="textColor" systemColor="systemOrangeColor"/>
                         <nil key="highlightedColor"/>
@@ -47,7 +47,7 @@
                     <constraint firstItem="5pt-lC-IWZ" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="5" id="WLP-Uf-RWr"/>
                     <constraint firstAttribute="trailing" secondItem="4tU-Dz-JVA" secondAttribute="trailing" id="eHv-Oq-eiB"/>
                     <constraint firstItem="Twg-nw-yDL" firstAttribute="top" secondItem="4tU-Dz-JVA" secondAttribute="bottom" constant="5" id="jcy-mm-KWc"/>
-                    <constraint firstAttribute="bottom" secondItem="Twg-nw-yDL" secondAttribute="bottom" id="lh6-2r-ibT"/>
+                    <constraint firstAttribute="bottom" secondItem="Twg-nw-yDL" secondAttribute="bottom" constant="5" id="lh6-2r-ibT"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>

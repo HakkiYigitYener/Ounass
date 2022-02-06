@@ -24,6 +24,7 @@ class ProductDetailViewModel: BaseViewModel<ProductDetailViewModel.State> {
         case title(designer: String, name: String, price: Double)
         case amberPoints(amberPoint: Double)
         case description(title: String, description: String)
+        case relatedProducts(products: [Product])
     }
     
     private(set) var sectionData:[SectionModel] = []
@@ -57,6 +58,12 @@ class ProductDetailViewModel: BaseViewModel<ProductDetailViewModel.State> {
         sectionData.append(.amberPoints(amberPoint: product.amberPointsPerItem))
         for attribute in product.copyAttributes {
             sectionData.append(.description(title: attribute.name, description: attribute.value))
+        }
+        if let relatedProductsDict = product.relatedProductsLookup, relatedProductsDict.count > 0 {
+            let relatedProducts: [Product] = relatedProductsDict.compactMap { (key: String, value: Product) in
+                return value
+            }
+            sectionData.append(.relatedProducts(products: relatedProducts))
         }
         self.emit(change: .succeeded)
     }

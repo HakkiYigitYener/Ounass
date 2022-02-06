@@ -14,9 +14,6 @@ class ProductDetailViewController: UIViewController {
     var productSku: String?
     var accordionStates: [Int:Bool] = [:]
     
-    
-    
-
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
@@ -30,6 +27,7 @@ class ProductDetailViewController: UIViewController {
         productTableView.register(UINib.init(nibName: "ProductAmberPointCell", bundle: nil), forCellReuseIdentifier: "ProductAmberPointCell")
         productTableView.register(UINib.init(nibName: "ProductDetailAccordionHeader", bundle: nil), forHeaderFooterViewReuseIdentifier: "ProductDetailAccordionHeader")
         productTableView.register(UINib.init(nibName: "ProductDetailAccordionCell", bundle: nil), forCellReuseIdentifier: "ProductDetailAccordionCell")
+        productTableView.register(UINib.init(nibName: "RelatedProductsCell", bundle: nil), forCellReuseIdentifier: "RelatedProductsCell")
     }
     
     private func handleStateChanges() {
@@ -38,6 +36,7 @@ class ProductDetailViewController: UIViewController {
             case .fetching:
                 break
             case .succeeded:
+                self?.title = self?.viewModel.product?.name
                 self?.productTableView.reloadData()
             case .failed(let errorMessage):
                 self?.showAlertMessage(title: "Warning", message: errorMessage)
@@ -95,6 +94,10 @@ extension ProductDetailViewController: UITableViewDataSource {
         case .description(title: _ , description: let description):
             let cell = tableView.dequeueReusableCell(withIdentifier: "ProductDetailAccordionCell", for: indexPath) as! ProductDetailAccordionCell
             cell.setupCell(descriptionText: description)
+            return cell
+        case .relatedProducts(products: let products):
+            let cell = tableView.dequeueReusableCell(withIdentifier: "RelatedProductsCell", for: indexPath) as! RelatedProductsCell
+            cell.setupCell(products: products)
             return cell
         }
     }
