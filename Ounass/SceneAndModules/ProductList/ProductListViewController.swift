@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  ProductListViewController.swift
 //  Ounass
 //
 //  Created by Hakkı Yiğit Yener on 4.02.2022.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class ProductListViewController: UIViewController {
     @IBOutlet weak var productListCollectionView: UICollectionView!
     let refreshControl = UIRefreshControl()
     
@@ -30,7 +30,7 @@ class ViewController: UIViewController {
     
     func fetchProductList(page: Int = 0, shouldClear: Bool = false)  {
         isFetching = true
-        NetworkManager.shared.fetchProductList(page: 0) {productList in
+        NetworkManager.shared.fetchProductList(page: page) {productList in
             self.isFetching = false
             self.refreshControl.endRefreshing()
             if shouldClear {
@@ -58,7 +58,7 @@ class ViewController: UIViewController {
     }
 }
 
-extension ViewController: UICollectionViewDelegate {
+extension ProductListViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let product = dataSource[indexPath.row]
         //TODO: Add loading
@@ -68,9 +68,9 @@ extension ViewController: UICollectionViewDelegate {
     }
 }
 
-extension ViewController: UICollectionViewDataSource {
+extension ProductListViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        dataSource.count
+        return dataSource.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -84,7 +84,7 @@ extension ViewController: UICollectionViewDataSource {
     }
 }
 
-extension ViewController: UICollectionViewDataSourcePrefetching {
+extension ProductListViewController: UICollectionViewDataSourcePrefetching {
     func collectionView(_ collectionView: UICollectionView, prefetchItemsAt indexPaths: [IndexPath]) {
         guard let maxIndex = indexPaths.sorted(by: { index1, index2 in
             return index1.row > index2.row
@@ -95,13 +95,14 @@ extension ViewController: UICollectionViewDataSourcePrefetching {
     }
 }
 
-extension ViewController: UICollectionViewDelegateFlowLayout {
+extension ProductListViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let flow = collectionView.collectionViewLayout as! UICollectionViewFlowLayout
         let screenSize: CGRect = UIScreen.main.bounds
         let itemWidth = (screenSize.width - (flow.sectionInset.left + flow.sectionInset.right + flow.minimumInteritemSpacing)) / 2
-        let contantHeight = 65.0
-        return CGSize(width: itemWidth, height: itemWidth * 1.75 + contantHeight)
+        let productDescriptionViewHeight = 65.0
+        let productImageAspectRatio = 1.75
+        return CGSize(width: itemWidth, height: itemWidth * productImageAspectRatio + productDescriptionViewHeight)
     }
 }
 

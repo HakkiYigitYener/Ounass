@@ -20,6 +20,10 @@ class ProductDetailSliderCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        addTouchGestureToImageSlider()
+    }
+    
+    func addTouchGestureToImageSlider() {
         let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(ProductDetailSliderCell.didTap))
         imageSlideView.addGestureRecognizer(gestureRecognizer)
     }

@@ -43,6 +43,7 @@ class ProductDetailViewController: UIViewController {
         for attribute in product.copyAttributes {
             dataSource.append(.description(title: attribute.name, description: attribute.value))
         }
+        productTableView.reloadData()
     }
 }
 
