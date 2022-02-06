@@ -10,15 +10,14 @@ import UIKit
 class ProductListViewController: UIViewController {
     @IBOutlet weak var productListCollectionView: UICollectionView!
     let refreshControl = UIRefreshControl()
-    
-    var dataSource: [Product] = []
-    var paginationData: Pagination?
-    var isFetching = false
+    let productListViewModel = ProductListViewModel()
+
 
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
-        fetchProductList()
+        handleStateChanges()
+        productListViewModel.fetchProductList()
     }
     
     func setupUI() {
@@ -28,24 +27,24 @@ class ProductListViewController: UIViewController {
         productListCollectionView.addSubview(refreshControl)
     }
     
-    func fetchProductList(page: Int = 0, shouldClear: Bool = false)  {
-        isFetching = true
-        NetworkManager.shared.fetchProductList(page: page) {productList in
-            self.isFetching = false
-            self.refreshControl.endRefreshing()
-            if shouldClear {
-                self.dataSource = productList.products
+    private func handleStateChanges() {
+        productListViewModel.addChangeHandler { [weak self] (state) in
+                switch state {
+                case .fetching:
+                    break
+                case .succeeded:
+                    self?.refreshControl.endRefreshing()
+                    self?.productListCollectionView.reloadData()
+                case .failed(let errorMessage):
+                    self?.showAlertMessage(title: "Warning", message: errorMessage)
+                    self?.refreshControl.endRefreshing()
+                    self?.productListCollectionView.reloadData()
+                }
             }
-            else {
-                self.dataSource += productList.products
-            }
-            self.paginationData = productList.pagination
-            self.productListCollectionView.reloadData()
         }
-    }
     
     @objc func refresh(_ sender: AnyObject) {
-        fetchProductList(page: 0, shouldClear: true)
+        productListViewModel.fetchProductList(page: 0, shouldClear: true)
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -56,13 +55,14 @@ class ProductListViewController: UIViewController {
         default: break
         }
     }
+    
 }
 
 extension ProductListViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let product = dataSource[indexPath.row]
+        let product = productListViewModel.dataSource[indexPath.row]
         //TODO: Add loading
-        NetworkManager.shared.fetchProductDetail(sku: product.sku) { productDetail in
+        NetworkManager.shared.fetchProductDetail(sku: product.sku) { productDetail, error in
             self.performSegue(withIdentifier: "ProductDetail", sender: productDetail)
         }
     }
@@ -70,12 +70,12 @@ extension ProductListViewController: UICollectionViewDelegate {
 
 extension ProductListViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return dataSource.count
+        return productListViewModel.dataSource.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ProductListCell", for: indexPath) as! ProductListCell
-        let product = dataSource[indexPath.row]
+        let product = productListViewModel.dataSource[indexPath.row]
         cell.setupCell(designerName: product.designerCategoryName,
                        productName: product.name,
                        price: product.price,
@@ -89,8 +89,11 @@ extension ProductListViewController: UICollectionViewDataSourcePrefetching {
         guard let maxIndex = indexPaths.sorted(by: { index1, index2 in
             return index1.row > index2.row
         }).first?.row else { return }
-        if maxIndex >= (dataSource.count - 1), let paginationData = paginationData, paginationData.currentPage < (paginationData.totalPages - 1), !isFetching {
-            fetchProductList(page: paginationData.currentPage + 1)
+        if maxIndex >= (productListViewModel.dataSource.count - 1),
+           let paginationData = productListViewModel.paginationData,
+            paginationData.currentPage < (paginationData.totalPages - 1),
+            !productListViewModel.isFetching {
+            productListViewModel.fetchProductList(page: paginationData.currentPage + 1)
         }
     }
 }
