@@ -14,7 +14,6 @@ class ProductDetailViewController: UIViewController {
         super.viewDidLoad()
 
         NetworkManager.shared.fetchProductDetail(sku: "214660294") { product in
-           print(product)
        }
     }
 }

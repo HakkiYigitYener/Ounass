@@ -72,7 +72,6 @@ extension ViewController: UICollectionViewDataSource {
 
 extension ViewController: UICollectionViewDataSourcePrefetching {
     func collectionView(_ collectionView: UICollectionView, prefetchItemsAt indexPaths: [IndexPath]) {
-        print(indexPaths)
         guard let maxIndex = indexPaths.sorted(by: { index1, index2 in
             return index1.row > index2.row
         }).first?.row else { return }
