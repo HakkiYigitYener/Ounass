@@ -9,23 +9,19 @@ import UIKit
 import ImageSlideshow
 
 class ProductDetailViewController: UIViewController {
-    
-    enum DataModel {
-        case slider(medias: [Media])
-        case title(designer: String, name: String, price: Double)
-        case amberPoints(amberPoint: Double)
-        case description(title: String, description: String)
-    }
+    var productSku: String?
+
     
     @IBOutlet weak var productTableView: UITableView!
-    var product: Product!
+    let viewModel = ProductDetailViewModel()
     
-    var dataSource:[DataModel] = []
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
-        setupDataSource()
+        handleStateChanges()
+        viewModel.fetchProductList(sku: productSku)
     }
     
     func setupUI() {
@@ -36,14 +32,18 @@ class ProductDetailViewController: UIViewController {
         productTableView.register(UINib.init(nibName: "ProductDetailAccordionCell", bundle: nil), forCellReuseIdentifier: "ProductDetailAccordionCell")
     }
     
-    func setupDataSource() {
-        dataSource.append(.slider(medias: product.media))
-        dataSource.append(.title(designer: product.designerCategoryName, name: product.name, price: product.price))
-        dataSource.append(.amberPoints(amberPoint: product.amberPointsPerItem))
-        for attribute in product.copyAttributes {
-            dataSource.append(.description(title: attribute.name, description: attribute.value))
+    private func handleStateChanges() {
+        viewModel.addChangeHandler { [weak self] (state) in
+            switch state {
+            case .fetching:
+                break
+            case .succeeded:
+                self?.productTableView.reloadData()
+            case .failed(let errorMessage):
+                self?.showAlertMessage(title: "Warning", message: errorMessage)
+                self?.productTableView.reloadData()
+            }
         }
-        productTableView.reloadData()
     }
 }
 
@@ -54,7 +54,7 @@ extension ProductDetailViewController: UITableViewDelegate {
 extension ProductDetailViewController: UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return dataSource.count
+        return viewModel.sectionData.count
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -62,7 +62,7 @@ extension ProductDetailViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        switch dataSource[indexPath.section] {
+        switch viewModel.sectionData[indexPath.section] {
         case .slider(let medias):
             let cell = tableView.dequeueReusableCell(withIdentifier: "ProductDetailSliderCell", for: indexPath) as! ProductDetailSliderCell
             cell.setupCell(medias: medias, delegate: self)
@@ -85,7 +85,7 @@ extension ProductDetailViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        switch dataSource[section] {
+        switch viewModel.sectionData[section] {
         case .description(title: let title , description: _):
             let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: "ProductDetailAccordionHeader") as! ProductDetailAccordionHeader
             header.setupHeader(title: title, isOpen: Bool.random())
@@ -97,7 +97,7 @@ extension ProductDetailViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        switch dataSource[section] {
+        switch viewModel.sectionData[section] {
         case .description(title: _, description: _):
             return UITableView.automaticDimension
         default:
