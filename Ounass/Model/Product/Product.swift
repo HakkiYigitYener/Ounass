@@ -1,6 +1,6 @@
 import Foundation
 
-class Product: Codable {
+struct Product: Codable {
     let sku: String
     let name: String
     let productDescription: String
@@ -23,29 +23,5 @@ class Product: Codable {
         case configurableAttributes
         case relatedProductsLookup
         case amberPointsPerItem
-    }
-
-    init(sku: String,
-         name: String,
-         productDescription: String,
-         price: Double,
-         copyAttributes: [CopyAttribute],
-         media: [Media],
-         minPrice: Double,
-         designerCategoryName: String,
-         configurableAttributes: [ConfigurableAttribute],
-         relatedProductsLookup: [String: Product],
-         amberPointsPerItem: Double) {
-        self.sku = sku
-        self.name = name
-        self.productDescription = productDescription
-        self.price = price
-        self.copyAttributes = copyAttributes
-        self.media = media
-        self.minPrice = minPrice
-        self.designerCategoryName = designerCategoryName
-        self.configurableAttributes = configurableAttributes
-        self.relatedProductsLookup = relatedProductsLookup
-        self.amberPointsPerItem = amberPointsPerItem
     }
 }
