@@ -11,7 +11,7 @@ class Product: Codable {
     let designerCategoryName: String
     let configurableAttributes: [ConfigurableAttribute]
     let relatedProductsLookup: [String: Product]?
-    let amberPointsPerItem: Int
+    let amberPointsPerItem: Double
 
     enum CodingKeys: String, CodingKey {
         case sku
@@ -35,7 +35,7 @@ class Product: Codable {
          designerCategoryName: String,
          configurableAttributes: [ConfigurableAttribute],
          relatedProductsLookup: [String: Product],
-         amberPointsPerItem: Int) {
+         amberPointsPerItem: Double) {
         self.sku = sku
         self.name = name
         self.productDescription = productDescription

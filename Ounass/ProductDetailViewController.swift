@@ -11,8 +11,9 @@ import ImageSlideshow
 class ProductDetailViewController: UIViewController {
     
     enum DataModel {
-        case slider([Media])
+        case slider(medias: [Media])
         case title(designer: String, name: String, price: Double)
+        case amberPoints(amberPoint: Double)
     }
     
     @IBOutlet weak var productTableView: UITableView!
@@ -29,11 +30,13 @@ class ProductDetailViewController: UIViewController {
     func setupUI() {
         productTableView.register(UINib.init(nibName: "ProductDetailSliderCell", bundle: nil), forCellReuseIdentifier: "ProductDetailSliderCell")
         productTableView.register(UINib.init(nibName: "ProductTitleCell", bundle: nil), forCellReuseIdentifier: "ProductTitleCell")
+        productTableView.register(UINib.init(nibName: "ProductAmberPointCell", bundle: nil), forCellReuseIdentifier: "ProductAmberPointCell")
     }
     
     func setupDataSource() {
-        dataSource.append(.slider(product.media))
+        dataSource.append(.slider(medias: product.media))
         dataSource.append(.title(designer: product.designerCategoryName, name: product.name, price: product.price))
+        dataSource.append(.amberPoints(amberPoint: product.amberPointsPerItem))
     }
 }
 
@@ -57,6 +60,10 @@ extension ProductDetailViewController: UITableViewDataSource {
             cell.setupCell(designerName: designer,
                            productName: name,
                            price: price)
+            return cell
+        case .amberPoints(let amberPoint):
+            let cell = tableView.dequeueReusableCell(withIdentifier: "ProductAmberPointCell", for: indexPath) as! ProductAmberPointCell
+            cell.setupCell(amberPoint: amberPoint)
             return cell
         }
     }

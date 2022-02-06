@@ -9,6 +9,10 @@ import UIKit
 
 class ProductTitleCell: UITableViewCell {
 
+    @IBOutlet weak var designerNameLabel: UILabel!
+    @IBOutlet weak var productNameLabel: UILabel!
+    @IBOutlet weak var priceLabel: UILabel!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -17,6 +21,9 @@ class ProductTitleCell: UITableViewCell {
     func setupCell(designerName: String,
                    productName: String,
                    price:Double) {
+        designerNameLabel.text = designerName
+        productNameLabel.text = productName
+        priceLabel.text = price.formattedPrice
     }
     
 }
