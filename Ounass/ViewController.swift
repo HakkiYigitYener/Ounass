@@ -86,7 +86,8 @@ extension ViewController: UICollectionViewDelegateFlowLayout {
         let flow = collectionView.collectionViewLayout as! UICollectionViewFlowLayout
         let screenSize: CGRect = UIScreen.main.bounds
         let itemWidth = (screenSize.width - (flow.sectionInset.left + flow.sectionInset.right + flow.minimumInteritemSpacing)) / 2
-        return CGSize(width: itemWidth, height: itemWidth * 2.15)
+        let contantHeight = 65.0
+        return CGSize(width: itemWidth, height: itemWidth * 1.75 + contantHeight)
     }
 }
 
