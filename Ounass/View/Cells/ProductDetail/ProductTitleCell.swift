@@ -25,5 +25,4 @@ class ProductTitleCell: UITableViewCell {
         productNameLabel.text = productName
         priceLabel.text = price.formattedPrice
     }
-    
 }
