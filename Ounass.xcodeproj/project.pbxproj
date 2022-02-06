@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4F742D01018B5ADD39C5E29E /* Pods_Ounass.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 762ED30AE49B3522DF923C46 /* Pods_Ounass.framework */; };
+		AA220FA227AFA0AC00EF057D /* ImageSlideShowExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA220FA127AFA0AC00EF057D /* ImageSlideShowExtensions.swift */; };
 		AAB44F9527ADBF8C00B1ED4A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAB44F9427ADBF8C00B1ED4A /* AppDelegate.swift */; };
 		AAB44F9727ADBF8C00B1ED4A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAB44F9627ADBF8C00B1ED4A /* SceneDelegate.swift */; };
 		AAB44F9927ADBF8C00B1ED4A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAB44F9827ADBF8C00B1ED4A /* ViewController.swift */; };
@@ -23,7 +25,6 @@
 		AAB4527627AF636E00B1ED4A /* Pagination.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAB4524927AF636E00B1ED4A /* Pagination.swift */; };
 		AAB4528A27AF65F000B1ED4A /* ProductListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAB4528827AF65F000B1ED4A /* ProductListCell.swift */; };
 		AAB4528B27AF65F000B1ED4A /* ProductListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AAB4528927AF65F000B1ED4A /* ProductListCell.xib */; };
-		AAB4528E27AF71D500B1ED4A /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = AAB4528D27AF71D500B1ED4A /* Kingfisher */; };
 		AAB4529027AF746900B1ED4A /* ProductDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAB4528F27AF746900B1ED4A /* ProductDetailViewController.swift */; };
 		AAB4529427AF778100B1ED4A /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAB4529327AF778100B1ED4A /* NetworkManager.swift */; };
 		AAB4529727AF7DFE00B1ED4A /* DoubleExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAB4529627AF7DFE00B1ED4A /* DoubleExtensions.swift */; };
@@ -31,6 +32,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2EB828EAF38E009F03F7E8F3 /* Pods-Ounass.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Ounass.release.xcconfig"; path = "Target Support Files/Pods-Ounass/Pods-Ounass.release.xcconfig"; sourceTree = "<group>"; };
+		762ED30AE49B3522DF923C46 /* Pods_Ounass.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Ounass.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		AA220FA127AFA0AC00EF057D /* ImageSlideShowExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageSlideShowExtensions.swift; sourceTree = "<group>"; };
 		AAB44F9127ADBF8C00B1ED4A /* Ounass.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Ounass.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AAB44F9427ADBF8C00B1ED4A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		AAB44F9627ADBF8C00B1ED4A /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -52,6 +56,7 @@
 		AAB4529327AF778100B1ED4A /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		AAB4529627AF7DFE00B1ED4A /* DoubleExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoubleExtensions.swift; sourceTree = "<group>"; };
 		AAB4529827AF7F2000B1ED4A /* ImageViewExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageViewExtensions.swift; sourceTree = "<group>"; };
+		F65EF5B1F44C9A7973A7E5CD /* Pods-Ounass.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Ounass.debug.xcconfig"; path = "Target Support Files/Pods-Ounass/Pods-Ounass.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,19 +64,30 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AAB4528E27AF71D500B1ED4A /* Kingfisher in Frameworks */,
 				AAB44FB427AF4EAF00B1ED4A /* Alamofire in Frameworks */,
+				4F742D01018B5ADD39C5E29E /* Pods_Ounass.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4B84471CE70E7985894C5F98 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				F65EF5B1F44C9A7973A7E5CD /* Pods-Ounass.debug.xcconfig */,
+				2EB828EAF38E009F03F7E8F3 /* Pods-Ounass.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
 		AAB44F8827ADBF8C00B1ED4A = {
 			isa = PBXGroup;
 			children = (
 				AAB44F9327ADBF8C00B1ED4A /* Ounass */,
 				AAB44F9227ADBF8C00B1ED4A /* Products */,
+				4B84471CE70E7985894C5F98 /* Pods */,
+				C8872AAF4A73680491B76C1A /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -154,8 +170,17 @@
 			children = (
 				AAB4529627AF7DFE00B1ED4A /* DoubleExtensions.swift */,
 				AAB4529827AF7F2000B1ED4A /* ImageViewExtensions.swift */,
+				AA220FA127AFA0AC00EF057D /* ImageSlideShowExtensions.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		C8872AAF4A73680491B76C1A /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				762ED30AE49B3522DF923C46 /* Pods_Ounass.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -165,9 +190,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = AAB44FA527ADBF8D00B1ED4A /* Build configuration list for PBXNativeTarget "Ounass" */;
 			buildPhases = (
+				C37D2363D4793620781B3EF4 /* [CP] Check Pods Manifest.lock */,
 				AAB44F8D27ADBF8C00B1ED4A /* Sources */,
 				AAB44F8E27ADBF8C00B1ED4A /* Frameworks */,
 				AAB44F8F27ADBF8C00B1ED4A /* Resources */,
+				18E081F96BE08FBBDE05A878 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -176,7 +203,6 @@
 			name = Ounass;
 			packageProductDependencies = (
 				AAB44FB327AF4EAF00B1ED4A /* Alamofire */,
-				AAB4528D27AF71D500B1ED4A /* Kingfisher */,
 			);
 			productName = Ounass;
 			productReference = AAB44F9127ADBF8C00B1ED4A /* Ounass.app */;
@@ -208,7 +234,6 @@
 			mainGroup = AAB44F8827ADBF8C00B1ED4A;
 			packageReferences = (
 				AAB44FB227AF4EAF00B1ED4A /* XCRemoteSwiftPackageReference "Alamofire" */,
-				AAB4528C27AF71D500B1ED4A /* XCRemoteSwiftPackageReference "Kingfisher" */,
 			);
 			productRefGroup = AAB44F9227ADBF8C00B1ED4A /* Products */;
 			projectDirPath = "";
@@ -233,6 +258,48 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		18E081F96BE08FBBDE05A878 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Ounass/Pods-Ounass-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Ounass/Pods-Ounass-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Ounass/Pods-Ounass-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		C37D2363D4793620781B3EF4 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Ounass-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		AAB44F8D27ADBF8C00B1ED4A /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -252,6 +319,7 @@
 				AAB44F9527ADBF8C00B1ED4A /* AppDelegate.swift in Sources */,
 				AAB4529027AF746900B1ED4A /* ProductDetailViewController.swift in Sources */,
 				AAB44F9727ADBF8C00B1ED4A /* SceneDelegate.swift in Sources */,
+				AA220FA227AFA0AC00EF057D /* ImageSlideShowExtensions.swift in Sources */,
 				AAB4528A27AF65F000B1ED4A /* ProductListCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -396,6 +464,7 @@
 		};
 		AAB44FA627ADBF8D00B1ED4A /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = F65EF5B1F44C9A7973A7E5CD /* Pods-Ounass.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -426,6 +495,7 @@
 		};
 		AAB44FA727ADBF8D00B1ED4A /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 2EB828EAF38E009F03F7E8F3 /* Pods-Ounass.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -486,14 +556,6 @@
 				minimumVersion = 5.0.0;
 			};
 		};
-		AAB4528C27AF71D500B1ED4A /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/onevcat/Kingfisher.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 7.0.0;
-			};
-		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -501,11 +563,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = AAB44FB227AF4EAF00B1ED4A /* XCRemoteSwiftPackageReference "Alamofire" */;
 			productName = Alamofire;
-		};
-		AAB4528D27AF71D500B1ED4A /* Kingfisher */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = AAB4528C27AF71D500B1ED4A /* XCRemoteSwiftPackageReference "Kingfisher" */;
-			productName = Kingfisher;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

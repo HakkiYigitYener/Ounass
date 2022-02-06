@@ -6,14 +6,20 @@
 //
 
 import UIKit
+import ImageSlideshow
 
 class ProductDetailViewController: UIViewController {
+    @IBOutlet weak var imageSlideView: ImageSlideshow!
     var product: Product!
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        NetworkManager.shared.fetchProductDetail(sku: "214660294") { product in
-       }
+        imageSlideView.contentScaleMode = .scaleAspectFill
+        let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(ProductDetailViewController.didTap))
+        imageSlideView.addGestureRecognizer(gestureRecognizer)
+        imageSlideView.setMediaInputs(medias: product.media)
+    }
+    @objc func didTap() {
+        imageSlideView.presentFullScreenController(from: self)
     }
 }
