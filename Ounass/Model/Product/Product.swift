@@ -12,6 +12,7 @@ struct Product: Codable {
     let configurableAttributes: [ConfigurableAttribute]
     let relatedProductsLookup: [String: Product]?
     let amberPointsPerItem: Double
+    let isInStock: Bool
 
     enum CodingKeys: String, CodingKey {
         case sku
@@ -22,6 +23,6 @@ struct Product: Codable {
         case designerCategoryName
         case configurableAttributes
         case relatedProductsLookup
-        case amberPointsPerItem
+        case amberPointsPerItem, isInStock
     }
 }

@@ -101,6 +101,9 @@
                                         <integer key="value" value="15"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="addToBasketButtonTouched:" destination="wep-FH-q5G" eventType="touchUpInside" id="QQV-Xm-w1l"/>
+                                </connections>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="DXg-n3-eE7"/>
@@ -117,6 +120,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="QBZ-sG-gAe"/>
                     <connections>
+                        <outlet property="addToBasketButton" destination="ZpK-vM-5DL" id="Iqa-Cy-drt"/>
                         <outlet property="productTableView" destination="E7z-GT-0cS" id="PLf-xY-rTJ"/>
                         <segue destination="HvG-Uf-xK5" kind="show" identifier="ProductDetail" id="BEb-WH-LZj"/>
                     </connections>

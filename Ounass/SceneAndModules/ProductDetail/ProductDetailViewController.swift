@@ -10,6 +10,7 @@ import ImageSlideshow
 
 class ProductDetailViewController: BaseViewController {
     @IBOutlet weak var productTableView: UITableView!
+    @IBOutlet weak var addToBasketButton: UIButton!
     private let viewModel = ProductDetailViewModel()
     var productSku: String?
     private var accordionStates: [Int:Bool] = [:]
@@ -23,9 +24,16 @@ class ProductDetailViewController: BaseViewController {
     
     func setupUI() {
         
-        let cells = [ ProductDetailSliderCell.self, ProductTitleCell.self, ProductAmberPointCell.self, ProductDetailAccordionCell.self, RelatedProductsCell.self ]
+        let cells = [ ProductDetailSliderCell.self, ProductTitleCell.self, ProductAmberPointCell.self, ProductDetailAccordionCell.self, RelatedProductsCell.self, ProductOptionsCell.self ]
         productTableView.register(cellTypes: cells, bundle: Bundle.main)
         productTableView.register(UINib.init(nibName: "ProductDetailAccordionHeader", bundle: nil), forHeaderFooterViewReuseIdentifier: "ProductDetailAccordionHeader")
+    }
+    
+    func setupAddToBasketButtonUI() {
+        let stockStatus = viewModel.getSelectedProductVariant()?.isInStock == true
+        addToBasketButton.backgroundColor = stockStatus ? .systemOrange : .lightGray
+        addToBasketButton.isUserInteractionEnabled = stockStatus
+
     }
     
     private func handleStateChanges() {
@@ -36,6 +44,7 @@ class ProductDetailViewController: BaseViewController {
             case .succeeded(let title):
                 self?.hideIndicator()
                 self?.title = title
+                self?.setupAddToBasketButtonUI()
                 self?.productTableView.reloadData()
             case .failed(let errorMessage):
                 self?.hideIndicator()
@@ -43,6 +52,9 @@ class ProductDetailViewController: BaseViewController {
                 self?.productTableView.reloadData()
             }
         }
+    }
+    @IBAction func addToBasketButtonTouched(_ sender: Any) {
+        self.showAlertMessage(title: "Success", message: "Item added to basket")
     }
     
     func accordionState(for section: Int) -> Bool {
@@ -66,7 +78,26 @@ class ProductDetailViewController: BaseViewController {
 }
 
 extension ProductDetailViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        switch viewModel.sectionData[section] {
+        case .description(title: let title , description: _):
+            let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: "ProductDetailAccordionHeader") as! ProductDetailAccordionHeader
+            header.setupHeader(title: title, isOpen: accordionState(for: section), section: section, delegate: self)
+            return header
+        default:
+            return nil
+        }
+        
+    }
     
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        switch viewModel.sectionData[section] {
+        case .description(title: _, description: _):
+            return UITableView.automaticDimension
+        default:
+            return 0
+        }
+    }
 }
 
 extension ProductDetailViewController: UITableViewDataSource {
@@ -108,30 +139,12 @@ extension ProductDetailViewController: UITableViewDataSource {
             let cell = tableView.dequeueReusableCell(with: RelatedProductsCell.self, for: indexPath)
             cell.setupCell(products: products, delegate: self)
             return cell
+        case .option(option: let option):
+            let cell = tableView.dequeueReusableCell(with: ProductOptionsCell.self, for: indexPath)
+            cell.setupCell(attribute: option, selectedOption: viewModel.optionSelections[option.code], delegate: self)
+            return cell
         }
     }
-    
-    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        switch viewModel.sectionData[section] {
-        case .description(title: let title , description: _):
-            let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: "ProductDetailAccordionHeader") as! ProductDetailAccordionHeader
-            header.setupHeader(title: title, isOpen: accordionState(for: section), section: section, delegate: self)
-            return header
-        default:
-            return nil
-        }
-        
-    }
-    
-    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        switch viewModel.sectionData[section] {
-        case .description(title: _, description: _):
-            return UITableView.automaticDimension
-        default:
-            return 0
-        }
-    }
-    
 }
 
 extension ProductDetailViewController: ProductDetailSliderCellDelegate {
@@ -150,5 +163,14 @@ extension ProductDetailViewController: ProductDetailAccordionHeaderDelegate {
 extension ProductDetailViewController: RelatedProductsCellDelegate {
     func relatedProductSelected(productSku: String) {
         self.performSegue(withIdentifier: "ProductDetail", sender: productSku)
+    }
+}
+
+extension ProductDetailViewController: ProductOptionsCellDelegate {
+    func didOptionSelected(attribute: ConfigurableAttribute, option: ConfigurableAttributeOption) {
+        viewModel.optionSelections[attribute.code] = option
+        productTableView.reloadData()
+        setupAddToBasketButtonUI()
+        
     }
 }

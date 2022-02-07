@@ -25,9 +25,14 @@ class ProductDetailViewModel: BaseViewModel<ProductDetailViewModel.State> {
         case amberPoints(amberPoint: Double)
         case description(title: String, description: String)
         case relatedProducts(products: [Product])
+        case option(option: ConfigurableAttribute)
     }
     
     private(set) var sectionData:[SectionModel] = []
+    
+    private(set) var product: Product?
+    
+    var optionSelections: [String:ConfigurableAttributeOption] = [:]
     
     let apiService: ProductDetailServiceProtocol
     
@@ -45,6 +50,7 @@ class ProductDetailViewModel: BaseViewModel<ProductDetailViewModel.State> {
                 self?.emit(change: .failed(errorMessage: error?.localizedDescription ?? ""))
                 return
             }
+            self?.product = productDetail
             self?.setupDataSource(product: productDetail)
         }
     }
@@ -54,6 +60,12 @@ class ProductDetailViewModel: BaseViewModel<ProductDetailViewModel.State> {
         sectionData.append(.slider(medias: product.media))
         sectionData.append(.title(designer: product.designerCategoryName, name: product.name, price: product.price))
         sectionData.append(.amberPoints(amberPoint: product.amberPointsPerItem))
+        for option in product.configurableAttributes {
+            sectionData.append(.option(option: option))
+            if option.options.count > 0 {
+                optionSelections[option.code] = option.options[0]
+            }
+        }
         for attribute in product.copyAttributes {
             sectionData.append(.description(title: attribute.name, description: attribute.value))
         }
@@ -66,3 +78,37 @@ class ProductDetailViewModel: BaseViewModel<ProductDetailViewModel.State> {
         self.emit(change: .succeeded(title: product.name))
     }
 }
+//MARK: Stock Calculations
+extension ProductDetailViewModel {
+    func getSelectedProductVariant() -> Product? {
+        guard let sku = getSelectedProductVariantSku(), let baseProduct = product else { return nil }
+        return baseProduct.relatedProductsLookup?[sku]
+    }
+
+    func getSelectedProductVariantSku() -> String? {
+        guard optionSelections.count > 0, let firstOption = optionSelections.first else {
+            return nil
+        }
+        var baseList = firstOption.value.simpleProductSkus
+        for selection in optionSelections {
+            baseList = commonElements(baseList, selection.value.simpleProductSkus)
+        }
+        return baseList.first
+    }
+
+    func commonElements<T: Sequence, U: Sequence>(_ lhs: T, _ rhs: U) -> [T.Iterator.Element]
+        where T.Iterator.Element: Equatable, T.Iterator.Element == U.Iterator.Element {
+            var common: [T.Iterator.Element] = []
+
+            for lhsItem in lhs {
+                for rhsItem in rhs {
+                    if lhsItem == rhsItem {
+                        common.append(lhsItem)
+                    }
+                }
+            }
+            return common
+    }
+}
+
+
