@@ -169,6 +169,10 @@ extension ProductDetailViewController: RelatedProductsCellDelegate {
 extension ProductDetailViewController: ProductOptionsCellDelegate {
     func didOptionSelected(attribute: ConfigurableAttribute, option: ConfigurableAttributeOption) {
         viewModel.optionSelections[attribute.code] = option
+        if let product = viewModel.product {
+            viewModel.setupDataSource(product: product)
+        }
+        
         productTableView.reloadData()
         setupAddToBasketButtonUI()
         

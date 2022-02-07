@@ -51,18 +51,21 @@ class ProductDetailViewModel: BaseViewModel<ProductDetailViewModel.State> {
                 return
             }
             self?.product = productDetail
-            self?.setupDataSource(product: productDetail)
+            self?.setupDataSource(product: productDetail, isFromService: true)
         }
     }
     
-    func setupDataSource(product: Product) {
+    func setupDataSource(product: Product, isFromService: Bool = false) {
         sectionData = []
-        sectionData.append(.slider(medias: product.media))
-        sectionData.append(.title(designer: product.designerCategoryName, name: product.name, price: product.price))
-        sectionData.append(.amberPoints(amberPoint: product.amberPointsPerItem))
+        
+        let selectedVariant = getSelectedProductVariant()!
+        sectionData.append(.slider(medias: selectedVariant.media))
+        
+        sectionData.append(.title(designer: selectedVariant.designerCategoryName, name: selectedVariant.name, price: selectedVariant.price))
+        sectionData.append(.amberPoints(amberPoint: selectedVariant.amberPointsPerItem))
         for option in product.configurableAttributes {
             sectionData.append(.option(option: option))
-            if option.options.count > 0 {
+            if option.options.count > 0, isFromService {
                 optionSelections[option.code] = option.options[0]
             }
         }
@@ -81,8 +84,8 @@ class ProductDetailViewModel: BaseViewModel<ProductDetailViewModel.State> {
 //MARK: Stock Calculations
 extension ProductDetailViewModel {
     func getSelectedProductVariant() -> Product? {
-        guard let sku = getSelectedProductVariantSku(), let baseProduct = product else { return nil }
-        return baseProduct.relatedProductsLookup?[sku]
+        guard let sku = getSelectedProductVariantSku() else { return product }
+        return product?.relatedProductsLookup?[sku]
     }
 
     func getSelectedProductVariantSku() -> String? {
